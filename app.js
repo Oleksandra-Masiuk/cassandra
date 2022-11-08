@@ -1,16 +1,14 @@
 import cassandra from 'cassandra-driver';
-import { config } from './config';
 
-export const initDatabase = () => {
+export const initDatabase = ({user, password, host, port, keyspace, localDataCenter}) => {
     const authProvider = new cassandra.auth.PlainTextAuthProvider(
-        config.user,
-        config.password,
+        user, password
     );
     return new cassandra.Client({
-        contactPoints: [config.host],
+        contactPoints: [host],
         authProvider,
-        protocolOptions: { port: [config.port] },
-        keyspace: 'test_keyspace',
-        localDataCenter: "datacenter1"
+        protocolOptions: { port: [port] },
+        keyspace,
+        localDataCenter,
     });
 };
