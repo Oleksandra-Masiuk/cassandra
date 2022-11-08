@@ -1,0 +1,30 @@
+{
+  "name": "cassandra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js --exec babel-node",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oleksandra-Masiuk/cassandra.git"
+  },
+  "author": "Oleksandra Masiuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oleksandra-Masiuk/cassandra/issues"
+  },
+  "homepage": "https://github.com/Oleksandra-Masiuk/cassandra#readme",
+  "dependencies": {
+    "cassandra-driver": "^4.6.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/node": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "nodemon": "^2.0.20"
+  }
+}
