@@ -1,11 +1,11 @@
-import { CassandraComplexTypes, CassandraPrimitiveTypes } from "../../constants/cassandraTypes";
+import { CassandraPrimitiveTypes } from "../../constants/cassandraTypes";
 import { JSONSchemaType } from '../../constants/JSONSchemaType';
 
 const convertType = (type) => {
     switch (type) {
         case CassandraPrimitiveTypes.BOOLEAN:
             return JSONSchemaType.BOOLEAN;
-            
+
         case CassandraPrimitiveTypes.BIGINT:
         case CassandraPrimitiveTypes.COUNTER:
         case CassandraPrimitiveTypes.DECIMAL:
@@ -29,6 +29,9 @@ const convertType = (type) => {
         case CassandraPrimitiveTypes.TEXT:
         case CassandraPrimitiveTypes.VARCHAR:
             return JSONSchemaType.STRING;
+
+        default:
+            return type;
     }
 }
 

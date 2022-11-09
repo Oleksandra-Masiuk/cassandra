@@ -1,4 +1,4 @@
-import { CassandraConst, LIMIT } from "../constants/cassandra";
+import { CassandraConst, LIMIT } from "../../constants/cassandra";
 
 const executeRequest = async (client, request) => {
     const response = await client.execute(request);
