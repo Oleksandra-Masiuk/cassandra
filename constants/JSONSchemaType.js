@@ -1,4 +1,4 @@
-export const JSONSchemaType = {
+const JSONSchemaType = {
     STRING: 'string',
     NUMBER: 'number',
     OBJECT: 'object',
@@ -6,3 +6,5 @@ export const JSONSchemaType = {
     BOOLEAN: 'boolean',
     NULL: 'null'
 }
+
+export { JSONSchemaType };

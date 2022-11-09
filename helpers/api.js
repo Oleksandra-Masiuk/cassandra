@@ -1,13 +1,12 @@
-import { CassandraConst } from "../constants/cassandra";
+import { CassandraConst, LIMIT } from "../constants/cassandra";
 
 const executeRequest = async (client, request) => {
     const response = await client.execute(request);
     return response.rows;
 }
 
-const getValueFromTable = async (client, options) => {
-    const { table, columns, limit } = options;
-    const request = `SELECT ${columns} FROM ${table} LIMIT ${limit};`;
+const getFirstRowFromTable = async (client, table) => {
+    const request = `SELECT ${CassandraConst.ALL} FROM ${table} LIMIT ${LIMIT};`;
     return executeRequest(client, request);
 };
 
@@ -21,4 +20,4 @@ const getColumnsFromTable = async (client, table) => {
     return executeRequest(client, request);
 }
 
-export { getTablesFromKeySpace, getValueFromTable, getColumnsFromTable };
+export { getTablesFromKeySpace, getFirstRowFromTable, getColumnsFromTable };

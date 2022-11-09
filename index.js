@@ -4,7 +4,7 @@ import {
 import { config } from './config';
 import { validateConfig } from './helpers/validateConfig';
 import { Notification } from './constants/notifications';
-import { getSchema } from './helpers/getSchema';
+import { getSchema } from './helpers/schema/getSchema';
 import { writeToJsonFile } from './helpers/writeToFile';
 import { notify } from './helpers/notify';
 

@@ -4,6 +4,8 @@ const CassandraConst = {
     TABLE_NAME: 'table_name',
     COLUMN_NAME: 'column_name',
     COLUMN_TYPE: 'type',
+    ALL: '*'
 };
 
-export {CassandraConst}
+const LIMIT = 1;
+export { CassandraConst, LIMIT };

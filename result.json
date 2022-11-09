@@ -3,27 +3,48 @@
     "type": "object",
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "properties": {
+        "cyclis": {
+            "title": "cyclis",
+            "type": "object",
+            "properties": {
+                "birthday": {
+                    "type": "boolean"
+                },
+                "height": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "last": {
+                    "type": "number"
+                },
+                "weight": {
+                    "type": "number"
+                }
+            }
+        },
         "cyclist_alt": {
             "title": "cyclist_alt",
             "type": "object",
             "properties": {
                 "birthday": {
-                    "type": "timestamp"
+                    "type": "string"
                 },
                 "height": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "id": {
-                    "type": "uuid"
+                    "type": "string"
                 },
                 "lastname": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "nationality": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "weight": {
-                    "type": "text"
+                    "type": "string"
                 }
             }
         },
@@ -32,22 +53,22 @@
             "type": "object",
             "properties": {
                 "birthday": {
-                    "type": "timestamp"
+                    "type": "string"
                 },
                 "height": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "id": {
-                    "type": "uuid"
+                    "type": "string"
                 },
                 "lastname": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "nationality": {
-                    "type": "text"
+                    "type": "string"
                 },
                 "weight": {
-                    "type": "text"
+                    "type": "string"
                 }
             }
         }
