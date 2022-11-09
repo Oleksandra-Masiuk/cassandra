@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/Oleksandra-Masiuk/cassandra#readme",
   "dependencies": {
-    "cassandra-driver": "^4.6.4"
+    "cassandra-driver": "^4.6.4",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

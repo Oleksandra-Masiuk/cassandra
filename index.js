@@ -1,23 +1,26 @@
 import {
     initDatabase
-} from './app'
+} from './initDatabase'
 import { config } from './config';
 import { validateConfig } from './helpers/validateConfig';
-import { CANNOT_CONNECT, INVALID_CONFIG } from './constants/errors';
+import { Error } from './constants/errors';
 import { CONNECTED } from './constants/approval';
+import { getSchema } from './helpers/getSchema';
+import { writeToJsonFile } from './helpers/writeToFile';
+import { notify } from './helpers/notify';
 
-const init = () => {
+const init = async () => {
     if (!validateConfig(config)) {
-        return console.log(INVALID_CONFIG);
+        return notify(Error.INVALID_CONFIG);
     }
     try {
-        const client = initDatabase(config);
-        client.connect().then(function () {
-            console.log(CONNECTED);
-        });
+        const client = await initDatabase(config);
+        notify(CONNECTED);
+        const schema = await getSchema(client);
+        writeToJsonFile(schema);
     }
     catch (error) {
-        console.log(CANNOT_CONNECT);
+        notify(error ?? Error.CANNOT_CONNECT);
     }
 }
 

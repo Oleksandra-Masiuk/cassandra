@@ -1,5 +1,6 @@
-const CANNOT_CONNECT = 'Cannot connect to database';
+const Error = {
+    CANNOT_CONNECT: 'Cannot connect to cluster',
+    INVALID_CONFIG: 'Config is invalid, please set all required values',
+}
 
-const INVALID_CONFIG = 'Config is invalid, please set all required values';
-
-export { CANNOT_CONNECT, INVALID_CONFIG };
+export { Error };
