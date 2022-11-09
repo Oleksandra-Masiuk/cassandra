@@ -1,18 +1,24 @@
+import { CassandraConst } from "../constants/cassandra";
+
+const executeRequest = async (client, request) => {
+    const response = await client.execute(request);
+    return response.rows;
+}
+
 const getValueFromTable = async (client, options) => {
     const { table, columns, limit } = options;
-    const response = await client.execute(`SELECT ${columns} FROM ${table} LIMIT ${limit};`);
-    return response.rows;
+    const request = `SELECT ${columns} FROM ${table} LIMIT ${limit};`;
+    return executeRequest(client, request);
 };
 
-const getColumnsFromKeySpace = async (client, columns) => {
-    const response = await client.execute(`SELECT ${columns} FROM system_schema.tables WHERE keyspace_name = '${client.keyspace}';`);
-    return response.rows;
+const getTablesFromKeySpace = async (client) => {
+    const request = `SELECT ${CassandraConst.TABLE_NAME} FROM ${CassandraConst.SYSTEM_TABLES} WHERE keyspace_name = '${client.keyspace}';`
+    return executeRequest(client, request);
 }
 
-const getColumnsFromTable = async (client, columns, table) => {
-    const response =
-        await client.execute(`SELECT ${columns} FROM system_schema.tables WHERE table_name = ${table};`);
-    return response.rows;
+const getColumnsFromTable = async (client, table) => {
+    const request = `SELECT ${CassandraConst.COLUMN_NAME}, ${CassandraConst.COLUMN_TYPE} FROM ${CassandraConst.SYSTEM_COLUMNS} WHERE table_name = '${table}' allow filtering;`;
+    return executeRequest(client, request);
 }
 
-export { getColumnsFromKeySpace, getValueFromTable, getColumnsFromTable };
+export { getTablesFromKeySpace, getValueFromTable, getColumnsFromTable };

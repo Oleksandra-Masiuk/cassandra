@@ -3,24 +3,24 @@ import {
 } from './initDatabase'
 import { config } from './config';
 import { validateConfig } from './helpers/validateConfig';
-import { Error } from './constants/errors';
-import { CONNECTED } from './constants/approval';
+import { Notification } from './constants/notifications';
 import { getSchema } from './helpers/getSchema';
 import { writeToJsonFile } from './helpers/writeToFile';
 import { notify } from './helpers/notify';
 
 const init = async () => {
     if (!validateConfig(config)) {
-        return notify(Error.INVALID_CONFIG);
+        return notify(Notification.INVALID_CONFIG);
     }
     try {
         const client = await initDatabase(config);
-        notify(CONNECTED);
+        notify(Notification.CONNECTED);
         const schema = await getSchema(client);
         writeToJsonFile(schema);
+        notify(Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
     }
     catch (error) {
-        notify(error ?? Error.CANNOT_CONNECT);
+        notify(error ?? Notification.CANNOT_CONNECT);
     }
 }
 

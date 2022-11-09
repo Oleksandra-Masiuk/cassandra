@@ -1,10 +1,14 @@
-import { config } from '../config';
-import { CassandraConstants } from '../constants/cassandra';
-import { getColumnsFromKeySpace } from './api';
+import { getColumnsFromTable, getTablesFromKeySpace } from './api';
+import { mapTableNames, mapColumnNames } from '../mappers/mappers';
 
 export const getSchema = async (client) => {
-    const allTables = await getColumnsFromKeySpace(client, CassandraConstants.TABLE_NAME);
+    const allTables = await getTablesFromKeySpace(client);
+    const allTableNames = mapTableNames(allTables);
 
-    console.log(allTables);
-    return {};
+    const result = await Promise.all(allTableNames.map(async table => {
+        const columns = await getColumnsFromTable(client, table);
+        const columnNames = mapColumnNames(columns);
+        return columnNames;
+    }))
+    return result;
 };
