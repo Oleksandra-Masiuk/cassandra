@@ -4,7 +4,8 @@ import { pathToFile } from '../constants/pathToResultFile';
 import { notify } from './notify';
 
 const writeToJsonFile = (content) => {
-    fs.writeFileSync(path.resolve(__dirname, pathToFile), JSON.stringify(content), (error) => notify(error));
+    const contentStringified = JSON.stringify(content, null, 4);
+    fs.writeFileSync(path.resolve(__dirname, pathToFile), contentStringified, (error) => notify(error));
 };
 
 export { writeToJsonFile };

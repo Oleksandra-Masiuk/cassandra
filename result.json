@@ -1,1 +1,55 @@
-[[{"name":"birthday","type":"timestamp"},{"name":"height","type":"text"},{"name":"id","type":"uuid"},{"name":"lastname","type":"text"},{"name":"nationality","type":"text"},{"name":"weight","type":"text"}]]
+{
+    "title": "datacenter1",
+    "type": "object",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+        "cyclist_alt": {
+            "title": "cyclist_alt",
+            "type": "object",
+            "properties": {
+                "birthday": {
+                    "type": "timestamp"
+                },
+                "height": {
+                    "type": "text"
+                },
+                "id": {
+                    "type": "uuid"
+                },
+                "lastname": {
+                    "type": "text"
+                },
+                "nationality": {
+                    "type": "text"
+                },
+                "weight": {
+                    "type": "text"
+                }
+            }
+        },
+        "cyclist_alt_stats": {
+            "title": "cyclist_alt_stats",
+            "type": "object",
+            "properties": {
+                "birthday": {
+                    "type": "timestamp"
+                },
+                "height": {
+                    "type": "text"
+                },
+                "id": {
+                    "type": "uuid"
+                },
+                "lastname": {
+                    "type": "text"
+                },
+                "nationality": {
+                    "type": "text"
+                },
+                "weight": {
+                    "type": "text"
+                }
+            }
+        }
+    }
+}
