@@ -56,13 +56,24 @@ const getComplexType = (columnData) => {
 
 };
 
+const getTypeWithoutValue = (type) => {
+    const isPrimary = Object.values(JSONSchemaType).includes(type);
+    return { type: isPrimary ? type : JSONSchemaType.NULL };
+}
+
 const getType = (type, value) => {
     const convertedType = convertType(type);
+
+    if (!value) {
+        return getTypeWithoutValue(convertedType);
+    }
+
     const { isComplex, isJsonParsed, isObject, isSimpleType } = checkMainTypes(type, value, convertedType);
 
     if (isSimpleType) {
         return { type: convertedType };
     }
+
 
     const columnData = { type, value, isComplex, isJsonParsed, isObject };
     return getComplexType(columnData);

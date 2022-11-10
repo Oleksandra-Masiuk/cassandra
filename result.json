@@ -47,6 +47,18 @@
                 }
             }
         },
+        "addressempty": {
+            "title": "addressempty",
+            "type": "object",
+            "properties": {
+                "addr": {
+                    "type": "null"
+                },
+                "id": {
+                    "type": "number"
+                }
+            }
+        },
         "books": {
             "title": "books",
             "type": "object",
