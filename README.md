@@ -4,8 +4,8 @@
 ## Commands:
 ### To start the application:
 
-- `npm start` &mdash; starts the application in production mode
-- `npm install` &mdash; installs necessary packages for application
+- `npm start` &mdash; starts the application in development mode
+- `npm install` &mdash; installs necessary packages for  the application
 
 ### To run tests:
 - `npm test` &mdash; runs tests
