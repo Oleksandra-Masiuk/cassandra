@@ -2,7 +2,7 @@ import {
     initDatabase
 } from './initDatabase'
 import { config } from './config';
-import { validateConfig } from './helpers/validateConfig';
+import { validateConfig } from './helpers/validators/validateConfig';
 import { Notification } from './constants/notifications';
 import { getSchema } from './helpers/schema/getSchema';
 import { writeToJsonFile } from './helpers/writeToFile';
@@ -20,7 +20,7 @@ const init = async () => {
         notify(Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
     }
     catch (error) {
-        notify(error ?? Notification.CANNOT_CONNECT);
+        notify(error?.message ?? Notification.CANNOT_CONNECT);
     }
 }
 

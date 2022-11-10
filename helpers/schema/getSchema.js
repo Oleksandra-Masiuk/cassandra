@@ -2,6 +2,7 @@ import { getColumnsFromTable, getTablesFromKeySpace, getFirstRowFromTable } from
 import { mapTableNames, mapColumn } from '../../mappers/mappers';
 import { createDataCenterSchema, createTableSchema } from './createSchema';
 import { getType } from '../cassandraType/getType';
+import { validateTables } from '../validators/validateTables';
 
 const getTableDataForSchemas = async (client, table) => {
     const columns = await getColumnsFromTable(client, table);
@@ -20,6 +21,8 @@ const getTableDataForSchemas = async (client, table) => {
 
 export const getSchema = async (client) => {
     const allTables = await getTablesFromKeySpace(client);
+    validateTables(allTables);
+    
     const allTableNames = mapTableNames(allTables);
 
     const tableDataForSchemas = await Promise.all(allTableNames.map(async table => await getTableDataForSchemas(client, table)));
