@@ -15,12 +15,12 @@ const getSchemaTableData = async (client, table) => {
     const columns = await getColumnsFromTable(client, table);
     const mappedColumns = mapColumn(columns);
     const tableValues = await getFirstRowFromTable(client, table);
-    const resultedColumns = mappedColumns.map((column)=>getSchemaColumnData(column, tableValues));
+    const resultedColumns = mappedColumns.map((column) => getSchemaColumnData(column, tableValues));
 
     return { table, data: resultedColumns };
 };
 
-export const getSchema = async (client) => {
+const getSchema = async (client) => {
     const tables = await getTablesFromKeySpace(client);
     
     validateTables(tables);
@@ -32,3 +32,5 @@ export const getSchema = async (client) => {
 
     return dataCenterSchema;
 };
+
+export { getSchema, getSchemaColumnData };
