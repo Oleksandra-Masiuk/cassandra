@@ -24,50 +24,25 @@
                 }
             }
         },
-        "cyclist_alt": {
-            "title": "cyclist_alt",
+        "whimsey": {
+            "title": "whimsey",
             "type": "object",
             "properties": {
-                "birthday": {
-                    "type": "string"
-                },
-                "height": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "lastname": {
-                    "type": "string"
-                },
-                "nationality": {
-                    "type": "string"
-                },
-                "weight": {
-                    "type": "string"
-                }
-            }
-        },
-        "cyclist_alt_stats": {
-            "title": "cyclist_alt_stats",
-            "type": "object",
-            "properties": {
-                "birthday": {
-                    "type": "string"
-                },
-                "height": {
-                    "type": "string"
+                "description": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "age": {
+                            "type": "number"
+                        },
+                        "idea": {
+                            "type": "object"
+                        }
+                    }
                 },
                 "id": {
-                    "type": "string"
-                },
-                "lastname": {
-                    "type": "string"
-                },
-                "nationality": {
-                    "type": "string"
-                },
-                "weight": {
                     "type": "string"
                 }
             }

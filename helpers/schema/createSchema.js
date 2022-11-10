@@ -1,10 +1,23 @@
-const createTableSchema = ({ table, data }) => {
-    const properties = data.reduce((prev, next) => {
+const getProperties = data => data.reduce((prev, next) => {
+
+    if (!next.properties) {
         return {
             ...prev,
             [next.name]: { type: next.type }
         }
-    }, {});
+    }
+
+    return {
+        ...prev,
+        [next.name]: {
+            type: next.type,
+            properties: getProperties(next.properties)
+        }
+    }
+}, {});
+
+const createTableSchema = ({ table, data }) => {
+    const properties = getProperties(data);
     return {
         title: table,
         type: 'object',
@@ -19,6 +32,7 @@ const createDataCenterSchema = (dataCenterName, data) => {
             [next.title]: next
         }
     }, {});
+
     return {
         title: dataCenterName,
         type: 'object',

@@ -11,8 +11,8 @@ const getTableDataForSchemas = async (client, table) => {
     let resultedColumns = [];
 
     mappedColumns.forEach((column) => {
-        const columType = getType(column.type, tableValues?.[column.name]);
-        resultedColumns.push({ ...column, type: columType });
+        const columType = getType(column.type, tableValues?.[0]?.[column.name]);
+        resultedColumns.push({ ...column, ...columType });
     });
 
     return { table, data: resultedColumns };
