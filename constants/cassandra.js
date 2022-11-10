@@ -8,4 +8,5 @@ const CassandraConst = {
 };
 
 const LIMIT = 1;
+
 export { CassandraConst, LIMIT };

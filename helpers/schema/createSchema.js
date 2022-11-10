@@ -1,4 +1,5 @@
-import { checkIfJsonArray, checkIfTuple } from "../cassandraType/checkType";
+import { JSON_SCHEMA_LINK } from "../../constants/jsonSchemaLink";
+import { checkIfJsonArray } from "../cassandraType/checkType";
 
 const getItems = (data) => {
     if (!checkIfJsonArray(data.type)) {
@@ -63,7 +64,7 @@ const createDataCenterSchema = (dataCenterName, data) => {
     return {
         title: dataCenterName,
         type: 'object',
-        '$schema': "https://json-schema.org/draft/2020-12/schema",
+        '$schema': JSON_SCHEMA_LINK,
         properties
     };
 };
