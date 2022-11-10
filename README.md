@@ -4,8 +4,12 @@
 ## Commands:
 ### To start the application:
 
-- `npm start` &mdash; starts the application in development mode
 - `npm install` &mdash; installs necessary packages for  the application
+- `npm start` &mdash; starts the application in development mode
+
+```diff
+- Do not forget to change Cassandra credentials in config.js!
+```
 
 ### To run tests:
 - `npm test` &mdash; runs tests
