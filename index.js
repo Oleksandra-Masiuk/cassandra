@@ -20,7 +20,7 @@ const init = async () => {
         notify(Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
     }
     catch (error) {
-        notify(error?.message ?? Notification.CANNOT_CONNECT);
+        notify(error ?? Notification.CANNOT_CONNECT);
     }
 }
 

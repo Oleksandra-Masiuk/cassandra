@@ -1,28 +1,15 @@
 import { convertType } from "./convertType";
-import { checkIfNull, checkIfDate, checkIfNumber, checkIfIsComplex, checkIfIsJson, checkIfObject } from "./checkType";
+import {
+    checkIfArrayType,
+    checkIfIsComplex,
+    checkIfIsJson,
+    checkIfObject,
+    checkIfMap,
+    checkIfTuple
+} from "./checkType";
+import { getApproximateType } from "./getApproximateType";
 import { JSONSchemaType } from "../../constants/JSONSchemaType";
 
-const getApproximateType = (value) => {
-    const isNull = checkIfNull(value);
-
-    if (isNull) {
-        return JSONSchemaType.NULL;
-    }
-
-    const isNumber = checkIfNumber(value);
-
-    if (isNumber) {
-        return JSONSchemaType.NUMBER;
-    }
-
-    const isDate = checkIfDate(value);
-
-    if (isDate) {
-        return JSONSchemaType.STRING;
-    }
-
-    return typeof value;
-};
 
 const getObjectType = (jsonParsed) => {
     const properties = [];
@@ -31,19 +18,51 @@ const getObjectType = (jsonParsed) => {
         properties.push({ name, ...getType(approximateType, value) });
     });
 
-    return { type: 'object', properties }
+    return { type: JSONSchemaType.OBJECT, properties }
 };
 
-const getComplexType = (columnData, isComplex, isJsonParsed, isObject) => {
-    const { type, value } = columnData;
-    if (isJsonParsed || isObject) {
+const getTupleType = (value) => {
+    const [firstValue, secondValue] = value.elements;
+    return ({
+        type: JSONSchemaType.ARRAY,
+        prefixItems: [
+            getType(typeof firstValue, firstValue),
+            getType(typeof secondValue, secondValue)
+        ]
+    })
+};
+
+const getArrayType = (value, type) => {
+    if (checkIfTuple(type)) {
+        return getTupleType(value);
+    }
+    const firstValue = checkIfMap(type) ? Object.values(value)?.[0] : value?.[0];
+    return {
+        type: JSONSchemaType.ARRAY,
+        items: getType(typeof firstValue, firstValue)
+    };
+}
+
+const getComplexType = (columnData) => {
+    const { type, value, isComplex, isJsonParsed, isObject } = columnData;
+    const isArray = checkIfArrayType(type, value);
+    const isObjectOrJson = (isJsonParsed || isObject) && !isArray;
+    if (isObjectOrJson) {
         return getObjectType(isObject ? value : JSON.parse(value));
     }
-    //if complex check 
+
+    if (isArray) {
+        const arr = getArrayType(value, type);
+        return arr;
+    }
+
+    //if utd
 };
 
 const getType = (type, value) => {
     const convertedType = convertType(type);
+
+    //move to a func
     const isComplex = checkIfIsComplex(type);
     const isJsonParsed = checkIfIsJson(value);
     const isObject = checkIfObject(value, convertedType);
@@ -53,8 +72,8 @@ const getType = (type, value) => {
         return { type: convertedType };
     }
 
-    const columnData = { type, value };
-    return getComplexType(columnData, isComplex, isJsonParsed, isObject);
+    const columnData = { type, value, isComplex, isJsonParsed, isObject };
+    return getComplexType(columnData);
 }
 
 export { getType };

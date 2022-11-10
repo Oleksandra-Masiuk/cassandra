@@ -4,7 +4,7 @@ import { createDataCenterSchema, createTableSchema } from './createSchema';
 import { getType } from '../cassandraType/getType';
 import { validateTables } from '../validators/validateTables';
 
-const getTableDataForSchemas = async (client, table) => {
+const getSchemaTableData = async (client, table) => {
     const columns = await getColumnsFromTable(client, table);
     const mappedColumns = mapColumn(columns);
     const tableValues = await getFirstRowFromTable(client, table);
@@ -20,14 +20,14 @@ const getTableDataForSchemas = async (client, table) => {
 };
 
 export const getSchema = async (client) => {
-    const allTables = await getTablesFromKeySpace(client);
-    validateTables(allTables);
-    
-    const allTableNames = mapTableNames(allTables);
+    const tables = await getTablesFromKeySpace(client);
+    validateTables(tables);
 
-    const tableDataForSchemas = await Promise.all(allTableNames.map(async table => await getTableDataForSchemas(client, table)));
+    const tableNames = mapTableNames(tables);
 
-    const tableSchemas = tableDataForSchemas.map(createTableSchema);
+    const tableSchemaData = await Promise.all(tableNames.map(async name => await getSchemaTableData(client, name)));
+
+    const tableSchemas = tableSchemaData.map(createTableSchema);
 
     const dataCenterSchema = createDataCenterSchema(client.options.localDataCenter, tableSchemas);
     return dataCenterSchema;

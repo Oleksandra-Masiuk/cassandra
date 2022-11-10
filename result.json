@@ -24,6 +24,59 @@
                 }
             }
         },
+        "durations": {
+            "title": "durations",
+            "type": "object",
+            "properties": {
+                "duration": {
+                    "type": "array",
+                    "prefixItems": [
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "event": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "number"
+                }
+            }
+        },
+        "users": {
+            "title": "users",
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "favs": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "scores": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "whimsey": {
             "title": "whimsey",
             "type": "object",
