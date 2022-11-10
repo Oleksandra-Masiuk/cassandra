@@ -1,14 +1,12 @@
 import { convertType } from "./convertType";
 import {
     checkIfArrayType,
-    checkIfIsComplex,
-    checkIfIsJson,
-    checkIfObject,
     checkIfMap,
     checkIfTuple
 } from "./checkType";
 import { getApproximateType } from "./getApproximateType";
 import { JSONSchemaType } from "../../constants/JSONSchemaType";
+import { checkMainTypes } from "./mainTypeCheck";
 
 
 const getObjectType = (jsonParsed) => {
@@ -56,17 +54,11 @@ const getComplexType = (columnData) => {
         return arr;
     }
 
-    //if utd
 };
 
 const getType = (type, value) => {
     const convertedType = convertType(type);
-
-    //move to a func
-    const isComplex = checkIfIsComplex(type);
-    const isJsonParsed = checkIfIsJson(value);
-    const isObject = checkIfObject(value, convertedType);
-    const isSimpleType = !isComplex && !isJsonParsed && !isObject;
+    const { isComplex, isJsonParsed, isObject, isSimpleType } = checkMainTypes(type, value, convertedType);
 
     if (isSimpleType) {
         return { type: convertedType };

@@ -9,10 +9,13 @@ const checkIfNumber = (value) => !isNaN(value);
 
 const checkIfDate = (value) => Date.parse(value);
 
-const checkIfObject = (value, type) => {
+const checkIfUUID = (type) => type === CassandraPrimitiveTypes.UUID;
+
+const checkIfObject = (value, convertedType, type) => {
     const isTypeObject = typeof value === 'object';
-    const isArray = checkIfArrayType(type, value);
-    return (isTypeObject && value !== null && type === CassandraPrimitiveTypes.STRING) || isArray;
+    const isArray = checkIfArrayType(convertedType, value);
+    const isUUID  = checkIfUUID(type);
+    return (isTypeObject && value !== null && !isUUID) || isArray;
 }
 
 const checkIfIsJson = (value) => {
