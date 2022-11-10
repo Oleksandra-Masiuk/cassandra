@@ -9,11 +9,10 @@ import { JSONSchemaType } from "../../constants/JSONSchemaType";
 import { checkMainTypes } from "./mainTypeCheck";
 
 
-const getObjectType = (jsonParsed) => {
-    const properties = [];
-    Object.entries(jsonParsed).forEach(([name, value]) => {
+const getObjectType = (object) => {
+    const properties = Object.entries(object).map(([name, value]) => {
         const approximateType = getApproximateType(value);
-        properties.push({ name, ...getType(approximateType, value) });
+        return { name, ...getType(approximateType, value) };
     });
 
     return { type: JSONSchemaType.OBJECT, properties }
@@ -34,7 +33,9 @@ const getArrayType = (value, type) => {
     if (checkIfTuple(type)) {
         return getTupleType(value);
     }
+
     const firstValue = checkIfMap(type) ? Object.values(value)?.[0] : value?.[0];
+
     return {
         type: JSONSchemaType.ARRAY,
         items: getType(typeof firstValue, firstValue)
@@ -42,7 +43,7 @@ const getArrayType = (value, type) => {
 }
 
 const getComplexType = (columnData) => {
-    const { type, value, isComplex, isJsonParsed, isObject } = columnData;
+    const { type, value, isJsonParsed, isObject } = columnData;
     const isArray = checkIfArrayType(type, value);
     const isObjectOrJson = (isJsonParsed || isObject) && !isArray;
     if (isObjectOrJson) {
@@ -74,8 +75,8 @@ const getType = (type, value) => {
         return { type: convertedType };
     }
 
-
     const columnData = { type, value, isComplex, isJsonParsed, isObject };
+
     return getComplexType(columnData);
 }
 

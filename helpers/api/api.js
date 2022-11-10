@@ -7,7 +7,8 @@ const executeRequest = async (client, request) => {
 
 const getFirstRowFromTable = async (client, table) => {
     const request = `SELECT ${CassandraConst.ALL} FROM ${table} LIMIT ${LIMIT};`;
-    return executeRequest(client, request);
+    const response = await executeRequest(client, request);
+    return response?.[0];
 };
 
 const getTablesFromKeySpace = async (client) => {

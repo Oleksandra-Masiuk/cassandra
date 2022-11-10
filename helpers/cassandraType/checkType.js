@@ -14,7 +14,7 @@ const checkIfUUID = (type) => type === CassandraPrimitiveTypes.UUID;
 const checkIfObject = (value, convertedType, type) => {
     const isTypeObject = typeof value === 'object';
     const isArray = checkIfArrayType(convertedType, value);
-    const isUUID  = checkIfUUID(type);
+    const isUUID = checkIfUUID(type);
     return (isTypeObject && value !== null && !isUUID) || isArray;
 }
 
