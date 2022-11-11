@@ -1,6 +1,8 @@
+import { NO_TABLES_IN_DATABASE } from '../../constants/notifications';
+
 const validateTables = tables => {
     if (!tables?.length) {
-        throw Error('There are no tables in database')
+        throw Error(NO_TABLES_IN_DATABASE)
     }
 };
 
