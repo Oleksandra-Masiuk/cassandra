@@ -6,7 +6,7 @@ import {
 } from "./checkType";
 import { getApproximateType } from "./getApproximateType";
 import { JSONSchemaType } from "../../constants/JSONSchemaType";
-import { checkMainTypes } from "./mainTypeCheck";
+import { checkMainTypes } from "./checkMainTypes";
 
 
 const getObjectType = (object) => {

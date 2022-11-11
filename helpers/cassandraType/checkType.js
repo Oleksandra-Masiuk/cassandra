@@ -1,7 +1,7 @@
 import { CassandraComplexTypes, CassandraPrimitiveTypes } from "../../constants/cassandraTypes";
 import { JSONSchemaType } from "../../constants/JSONSchemaType";
 
-const checkIfIsComplex = (type) => Object.values(CassandraComplexTypes).some(cstype => cstype === type);
+const checkIfComplex = (type) => Object.values(CassandraComplexTypes).some(cstype => cstype === type);
 
 const checkIfNull = (value) => { value === null };
 
@@ -18,7 +18,7 @@ const checkIfObject = (value, convertedType, type) => {
     return (isTypeObject && value !== null && !isUUID) || isArray;
 }
 
-const checkIfIsJson = (value) => {
+const checkIfJson = (value) => {
     try {
         const parsed = JSON.parse(value);
         return !checkIfNumber(parsed);
@@ -42,4 +42,4 @@ const checkIfMap = type => type !== CassandraComplexTypes.MAP;
 
 const checkIfJsonArray = type => type === JSONSchemaType.ARRAY;
 
-export { checkIfIsComplex, checkIfIsJson, checkIfNull, checkIfDate, checkIfNumber, checkIfObject, checkIfArrayType, checkIfMap, checkIfJsonArray, checkIfTuple };
+export { checkIfComplex, checkIfJson, checkIfNull, checkIfDate, checkIfNumber, checkIfObject, checkIfArrayType, checkIfMap, checkIfJsonArray, checkIfTuple };
