@@ -9,6 +9,7 @@ import {
     TABLE_WITH_UPD_AND_VALUES,
     TABLE_WITH_UPD
 } from './mockData';
+
 import { NO_TABLES_IN_DATABASE } from '../constants/notifications';
 import { JSONSchemaType } from '../constants/JSONSchemaType';
 
