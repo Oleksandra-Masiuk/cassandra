@@ -16,8 +16,7 @@ const init = async () => {
         const client = await initDatabase(config);
         notify(Notification.CONNECTED);
         const schema = await getSchema(client);
-        writeToJsonFile(schema);
-        notify(Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
+        writeToJsonFile(schema, Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
     }
     catch (error) {
         notify(error.message ?? Notification.CANNOT_CONNECT);
