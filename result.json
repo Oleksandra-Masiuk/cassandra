@@ -79,6 +79,24 @@
                 }
             }
         },
+        "countries": {
+            "title": "countries",
+            "type": "object",
+            "properties": {
+                "area": {
+                    "type": "number"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "neighbors": {
+                    "type": "null"
+                }
+            }
+        },
         "cyclis": {
             "title": "cyclis",
             "type": "object",

@@ -7,6 +7,7 @@ import { Notification } from './constants/notifications';
 import { getSchema } from './helpers/schema/getSchema';
 import { writeToJsonFile } from './helpers/writeToFile';
 import { notify } from './helpers/notify';
+import { getDBMetadata } from './helpers/metadata/getDBMetadata';
 
 const init = async () => {
     if (!validateConfig(config)) {
@@ -15,9 +16,9 @@ const init = async () => {
     try {
         const client = await initDatabase(config);
         notify(Notification.CONNECTED);
-        const schema = await getSchema(client);
-        writeToJsonFile(schema);
-        notify(Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
+        const DBMetadata = await getDBMetadata(client);
+        const schema = await getSchema(client, DBMetadata);
+        writeToJsonFile(schema, Notification.SUCCESSFULLY_WRITTEN_TO_FILE);
     }
     catch (error) {
         notify(error.message ?? Notification.CANNOT_CONNECT);

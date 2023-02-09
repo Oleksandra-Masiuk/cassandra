@@ -1,5 +1,6 @@
 import { JSON_SCHEMA_LINK } from "../../constants/jsonSchemaLink";
 import { checkIfJsonArray } from "../cassandraType/checkType";
+import { getSchemaColumnData } from "./getSchema";
 
 const getItems = (data) => {
     if (!checkIfJsonArray(data.type)) {
@@ -44,7 +45,8 @@ const getProperties = data => data.reduce((prev, next) => {
     }
 }, {});
 
-const createTableSchema = ({ table, data }) => {
+const createTableSchema = ({ table, columns, values }) => {
+    const data = columns.map((column) => getSchemaColumnData(column, values));
     const properties = getProperties(data);
     return {
         title: table,
